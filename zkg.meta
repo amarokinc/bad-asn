@@ -1,0 +1,6 @@
+[package]
+description = Adds ASN reputation data of external IP addresses to notice.log if the ASN crosses a predetermined threshold as defined by circl.lu
+credits = Michael Portera @mportatoes, Hudson Carr
+tags = asn, geoip, conn, remote
+version = 1.0
+script_dir = zeek
