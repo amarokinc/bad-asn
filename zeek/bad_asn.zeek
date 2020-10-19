@@ -57,7 +57,7 @@ event zeek_init()
 	Broker::listen("127.0.0.1", 9999/tcp);
 	Broker::subscribe("/topic/asns");
 	local sleep_command = Exec::Command($cmd=fmt("sleep 10"));
-	local pybroker_command = Exec::Command($cmd=fmt("python3 /opt/zeek/share/zeek/site/bad_asn/bad_asn.py & sleep 1") );
+	local pybroker_command = Exec::Command($cmd=fmt("python3 /opt/zeek/share/zeek/site/bad-asn/bad_asn.py & sleep 1") );
 	when ( local sleep = Exec::run(sleep_command) ){
 		
 		
