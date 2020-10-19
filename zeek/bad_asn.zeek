@@ -1,9 +1,8 @@
-
 @load base/frameworks/notice
 global rem_asn: count;
 global REM_ASN: event(rem_asn: count, remote_ip: addr);
 
-# Add Bad_ASN notice
+## Add Bad_ASN notice
 export {
 
 	redef enum Notice::Type += {
@@ -11,7 +10,7 @@ export {
 		};
 	}
 
-# On connection end
+## On connection end
 event connection_state_remove(c: connection)
   	 {
 	local remote_ip: addr;
@@ -26,27 +25,27 @@ event connection_state_remove(c: connection)
 		remote_ip = c$id$orig_h;
 		
 		}
-	# Lookup the ASN
+	## Lookup the ASN
 	rem_asn = lookup_asn(remote_ip);
-	# Trigger an event
+	## Trigger an event
 	event REM_ASN(rem_asn, remote_ip);
-        # Publish to broker
+        ## Publish to broker
         Broker::auto_publish("/topic/asns", REM_ASN);
 	}
 
 event BadASN(ranking_list: vector of string)
 	{
-	# Get the ASN from the list returned by python
+	## Get the ASN from the list returned by python
 	local asn=ranking_list[0];
-	# Get the rank from the list returned by python
+	## Get the rank from the list returned by python
 	local rank=ranking_list[1];
-	# Get the IP from the list returned by python
+	## Get the IP from the list returned by python
 	local py_ip=ranking_list[2];
-	# Create the notice for writing to log
+	## Create the notice for writing to log
 	NOTICE([$note=Bad_ASN, $msg=fmt("ASN crossed bad reputation threshold -- ASN: %s | IP: %s | Rank: %s ", asn, py_ip, rank)]);
 	}
 
-# Start the broker service when the script loads
+## Start the broker service when the script loads
 event zeek_init()
         {
 	Broker::listen("127.0.0.1", 9999/tcp);
@@ -63,7 +62,7 @@ event zeek_init()
 
 	}
 
-# Kill the python process when Zeek shuts down
+## Kill the python process when Zeek shuts down
 event zeek_done()
         {
         local kill_python = Exec::Command($cmd=fmt("ps axf | grep bad_asn.py | grep -v grep | awk \'{print \"kill -9 \" $1}\' | sh"));
