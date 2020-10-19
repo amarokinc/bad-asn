@@ -3,6 +3,7 @@ global rem_asn: count;
 global REM_ASN: event(rem_asn: count, remote_ip: addr);
 
 ## Add Bad_ASN notice
+
 export {
 
 	redef enum Notice::Type += {
@@ -11,6 +12,7 @@ export {
 	}
 
 ## On connection end
+
 event connection_state_remove(c: connection)
   	 {
 	local remote_ip: addr;
@@ -25,16 +27,19 @@ event connection_state_remove(c: connection)
 		remote_ip = c$id$orig_h;
 		
 		}
+
 	## Lookup the ASN
 	rem_asn = lookup_asn(remote_ip);
 	## Trigger an event
 	event REM_ASN(rem_asn, remote_ip);
         ## Publish to broker
+
         Broker::auto_publish("/topic/asns", REM_ASN);
 	}
 
 event BadASN(ranking_list: vector of string)
 	{
+
 	## Get the ASN from the list returned by python
 	local asn=ranking_list[0];
 	## Get the rank from the list returned by python
@@ -46,6 +51,7 @@ event BadASN(ranking_list: vector of string)
 	}
 
 ## Start the broker service when the script loads
+
 event zeek_init()
         {
 	Broker::listen("127.0.0.1", 9999/tcp);
@@ -63,6 +69,7 @@ event zeek_init()
 	}
 
 ## Kill the python process when Zeek shuts down
+
 event zeek_done()
         {
         local kill_python = Exec::Command($cmd=fmt("ps axf | grep bad_asn.py | grep -v grep | awk \'{print \"kill -9 \" $1}\' | sh"));

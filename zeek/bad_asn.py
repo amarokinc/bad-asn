@@ -9,6 +9,7 @@ ep.peer("127.0.0.1", 9999)
 
 # Wait until connection is established, quit the script if it doesn't
 st = stat_stub.get()
+
 if not (type(st) == broker.Status and st.code() == broker.SC.PeerAdded):
     print("could not connect")
     sys.exit(0)
@@ -16,16 +17,19 @@ if not (type(st) == broker.Status and st.code() == broker.SC.PeerAdded):
 # ASN ranking endpoint
 url = 'https://bgpranking-ng.circl.lu/json/asn'
 
+
 # Initializing two dictionaries to hold rankings data and ASN:IP mappings
 asn_rankings={}
 asn_ips={}
 
 #Initialize date for timekeeping, this will be used to reset the above dictionaries each day
+
 tdate = datetime.date.today()
 
 # While the script is running, do this
 while True:
     # Get subscription from broker
+
     (t, d) = subscriber.get()
     # Get the event
     remote_event = (broker.zeek.Event(d))
@@ -71,3 +75,4 @@ while True:
         asn_rankings={}
         asn_ips={}
         tdate=datetime.date.today()
+
