@@ -1,10 +1,9 @@
 # Using Zeek broker to alert on Bad ASNs as reported by [CIRCL](http://circle.lu/projects/bgpranking/)
 --------------------------------------------------------------
-The Zeek script will perform an ASN lookup on the remote connection's IP address from conn.log. It will then perform a call to CIRCL's Bad ASN API to retrieve a score/ranking. ASNs that cross a determined threshold will be written to notice.log. There are a couple of prerequisites noted below. Many rely on default settings but please double check before implementing.
+The Zeek script will perform an ASN lookup on the remote connection's IP address from conn.log. It will then perform a call to CIRCL's Bad ASN API to retrieve a score/ranking. ASNs that cross a determined threshold will be written to notice.log. There are a couple of pre-requisites noted below. Many rely on default settings but please double check before implementing.
 
 --------------------------------------------------------------
 ## Notes:
-- Written to work with Python 3.x
 - Broker is utilized to pass data from Zeek to python and perform API lookups. Broker information and installation install instructions can be found [here](https://github.com/zeek/broker). Be sure to run `git clone` with the `--recursive` flag set.
 - GeoLocation data and integration with MaxMind is required to perform the initial ASN lookups. You will need to install libmaxminddb and build from source. Zeek has documented this process [here](https://docs.zeek.org/en/current/frameworks/geoip.html)
 - You can sign up for access to MaxMind's free GeoLite databases [here](https://dev.maxmind.com/geoip/geoip2/geolite2/)
