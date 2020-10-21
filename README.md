@@ -13,3 +13,6 @@ The Zeek script will perform an ASN lookup on the remote connection's IP address
 - The Zeek script uses the EXEC framework to start the companion python script upon Zeek startup. __The location of the python script is currently hardcoded into the command and this would need to be changed if packages are installed anywhere else.__
 - This has been used mostly on small, internet-facing honeypots and we have not experienced any performance issues. However, we have not tested in an enterprise environment with high a volume of traffic - use with caution in such environments as this will perform numerous lookups and could impact performance.
 - __Development and testing was performed using Zeek 3.2.0.__ Testing indicated that the scripts are not compatible with older Zeek versions.
+
+## Usage Example:
+![wget screenshot](./images/wget_screen.png)
