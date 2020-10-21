@@ -15,4 +15,4 @@ The Zeek script will perform an ASN lookup on the remote connection's IP address
 - __Development and testing was performed using Zeek 3.2.0.__ Testing indicated that the scripts are not compatible with older Zeek versions.
 
 ## Usage Example:
-![wget screenshot](./images/wget_screen.png)
+![wget screenshot](https://github.com/hud-c/bad-asn/blob/main/images/wget_screen.PNG)
