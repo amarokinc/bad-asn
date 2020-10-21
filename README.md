@@ -21,3 +21,4 @@ The Zeek script will perform an ASN lookup on the remote connection's IP address
 ## Improvement areas:
 - The current method for starting and stopping the python process is clunky and could potentially be improved with a better Zeek EXEC statement.
 - Currently, the Zeek sript writes one formatted string to notice.log. This could be improved to include individual fields.
+- There are certain to be other areas for improvement
