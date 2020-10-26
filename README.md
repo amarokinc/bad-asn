@@ -15,8 +15,8 @@ The Zeek script will perform an ASN lookup on the remote connection's IP address
 - __Development and testing was performed using Zeek 3.2.0.__ Testing indicated that the scripts are not compatible with older Zeek versions.
 
 ## Usage Example:
-![wget screenshot](wget_screen.PNG)
-![log screenshot](log_screenshot.png)
+![wget screenshot](images/wget_screen.PNG)
+![log screenshot](images/log_screenshot.png)
 
 ## Improvement areas:
 - The current method for starting and stopping the python process is clunky and could potentially be improved with a better Zeek EXEC statement.
